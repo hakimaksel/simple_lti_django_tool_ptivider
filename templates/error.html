@@ -1,0 +1,16 @@
+<html>
+	<body>
+		<p style="color: red;"> {{ message }} </p>
+		<h3> Parameters </h3>
+		<table>
+			{% for key in params %}
+			<tr>
+				<td>{{ key }}</td>
+				<td>{{ params[key] }}</td>
+			</tr>
+			{% endfor %}
+		</table>
+	</body>
+
+
+</html>

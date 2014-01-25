@@ -1,0 +1,12 @@
+<html>
+	<head>
+		<title>Demo LTI Assessment Tool</title>
+	</head>
+	<body>
+		<form action="/assesment" method="post">
+			<p>Hi, {{ userid }}. On a scale of <code>0.0</code> to <code>1.0</code> how well would you say you did on this assessment?</p>
+			<input name="score" type="text" width="5" id="score" />
+			<input type="submit" value="submit" />
+		</form>
+	</body>
+</html>
