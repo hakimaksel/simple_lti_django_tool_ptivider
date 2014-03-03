@@ -39,7 +39,7 @@ def lti_tool(request):
 
 	request.session['launch_params'] = tp.to_params()
 	userid = request.POST['user_id']
-	temp = get_template('boring_tool.html')
+	temp = get_template('assessment.html')
 	html = temp.render(Context({'userid': userid}))
 	return HttpResponse(html)
 
@@ -47,16 +47,15 @@ def lti_tool(request):
 def assessment(request):
 	if request.session['launch_params']:
 		key = request.session['launch_params']['oauth_consumer_key']
-		secret = oauth_creds[key]
 	else:
 		key_error_temp = get_template("error.html")
 		key_error_html = key_error_temp.render(Context({'message': 'The tool never launched'}))
 		return HttpResponse(key_error_html)
 
-	tp = DjangoToolProvider(key, secret, request.session['launch_params'])
+	tp = DjangoToolProvider(key, oauth_creds[key], request.session['launch_params'])
 
 	score = request.POST['score']
-	tp.post_replace_result(resp)
+	tp.post_replace_result(score)
 	temp = get_template('assessment_finished.html')
 	html = temp.render(Context({'score': score}))
 	return HttpResponse(html)
